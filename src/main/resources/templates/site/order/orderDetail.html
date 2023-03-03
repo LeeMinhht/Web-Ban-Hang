@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{site/dashboardLayout.html}">
+
+<head> </head>
+
+<body>
+	<section class="mx-auto" layout:fragment="content">
+		<div class="best-features">
+			<div class="container">
+				<form th:action="@{/site/orderDetail}" method="post" th:object="${customer}">
+					<div class="row">
+
+
+						<div class="container py-5 h-100">
+							<div class="row d-flex align-items-center justify-content-center h-100">
+								<div class="col-md-8 col-lg-7 col-xl-6">
+									<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+										class="img-fluid" alt="Phone image">
+								</div>
+								<div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+
+									<!-- Email input -->
+									<div class="form-outline mb-4">
+										
+
+										<label class="form-label" for="form1Example13">Adress</label>
+										<input type="text" id="form1Example13" class="form-control form-control-lg" />
+										
+									</div>
+
+									<!-- Password input -->
+									<div class="form-outline mb-4">
+
+										
+										<label class="form-label" for="form1Example23">Phone number</label>
+										<input type="text" id="form1Example23"
+											class="form-control form-control-lg" />
+									</div>
+									<input type="hidden" name="productId" th:value="${productId}" />
+									<input type="hidden" name="orderId" th:value="${orderId}" />
+
+									<script>
+										function alertSucc(){
+											alert("Order Successfully");
+										}
+									</script>
+
+
+
+									<!-- Submit button -->
+									<!-- Submit button -->
+									<button type="submit" onclick="alertSucc()" class="btn btn-primary btn-lg btn-block">OK</button>
+
+
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

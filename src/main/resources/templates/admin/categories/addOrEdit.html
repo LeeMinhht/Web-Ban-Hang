@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+
+
+</head>
+
+<body>
+
+
+
+	<section class="vh-100" layout:fragment="content" style="margin-top: -50px;">
+		
+		<div class="best-features">
+			<h2 style="text-align: center; color: white;">Add New Category</h2>
+			
+			<div class="container">
+				
+				<form th:action="@{/admin/categories/saveOrUpdate}" method="post" th:object="${category}">
+					<div class="row">
+
+						
+						<div class="container py-5 h-100">
+							
+							<div class="row d-flex align-items-center justify-content-center h-100">
+								<div class="col-md-8 col-lg-7 col-xl-6">
+									<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+										class="img-fluid" alt="Phone image">
+								</div>
+								<div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+									<form>
+										<!-- Email input -->
+										<div class="form-outline mb-4">
+											<input type="hidden" th:field="*{isEdit}">
+											<input type="email" id="form1Example13" class="form-control form-control-lg"
+												th:field="*{categoryId}" readonly />
+											<small th:if="${#fields.hasErrors('categoryId')}"
+												class="form-text text-muted">Category ID is required</small>
+											<label class="form-label" for="form1Example13">Category ID</label>
+										</div>
+
+										<!-- Password input -->
+										<div class="form-outline mb-4">
+											<input type="text" id="form1Example23" class="form-control form-control-lg"
+												th:field="*{name}" />
+											<small th:if="${#fields.hasErrors('name')}"
+												class="form-text text-muted">Name is required</small>
+											<label class="form-label" for="form1Example23">Name</label>
+										</div>
+
+
+
+										<!-- Submit button -->
+										<button type="reset" class="btn btn-secondary btn-lg btn-block">Reset</button>
+										<a th:href="@{/admin/categories/searchpaginated}" type="reset"
+											class="btn btn-secondary btn-lg btn-block">List Category</a>
+											<button type="submit" class="btn btn-primary btn-lg btn-block">
+												<span th:if="${category.isEdit}">Update</span>
+												<span th:unless="${category.isEdit}">Save</span>
+											</button>
+
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+
+
+
+
+</body>
+
+</html>

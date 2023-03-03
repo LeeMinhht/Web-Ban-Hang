@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+
+
+</head>
+
+<body>
+
+
+
+  <section class="vh-auto" layout:fragment="content" style="margin-top: -50px;">
+    
+    <div class="container py-5 h-100">
+      <h2 th:text="${product.isEdit?'Edit Product':'Add New Product'}" class="mb-4" style="text-align: center; color: white;">Add Product</h2>
+      <form action="/admin/products/saveOrUpdate" method="post" enctype="multipart/form-data" th:object="${product}">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+          <div class="col-md-8 col-lg-7 col-xl-6 " style="margin-top: -300px;">
+
+            <!-- hàm dùng load ảnh khi được chọn từ foder lên giao diện -->
+            <script>
+              function chooseFile(fileInput) {
+                if (fileInput.files && fileInput.files[0]) {
+                  var reader = new FileReader();
+
+                  reader.onload = function (e) {
+                    $('#image').attr('src', e.target.result);
+                  }
+                  reader.readAsDataURL(fileInput.files[0]);
+                }
+              }
+            </script>
+
+            <img id="image"
+              th:src="${product.image!=null? '/admin/products/images/' + product.image : 'images/5th-item.jpg'}"
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" width="90%"
+              class="img-fluid" alt="Phone image">
+            <input class="form-control form-control-lg" onchange="chooseFile(this)" type="file" name="imageFile">
+          </div>
+          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+
+            <!-- Product input -->
+            <input type="hidden" th:field="*{isEdit}">
+            <div class="form-outline mb-4" th:if="${product.isEdit}">
+              <input type="text" id="form1Example13" class="form-control form-control-lg" name="productId"
+                th:field="*{productId}" />
+              <label class="form-label" for="form1Example13">Product ID</label>
+            </div>
+
+            <!-- Name input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="form1Example23" class="form-control form-control-lg" name="name"
+                th:field="*{name}" />
+              <label class="form-label" for="form1Example23">name</label>
+            </div>
+
+            <!-- Quantity input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="form1Example23" class="form-control form-control-lg" name="quantity"
+                th:field="*{quantity}" />
+              <label class="form-label" for="form1Example23">Quantity</label>
+            </div>
+
+            <!-- Unit Price input -->
+            <div class="form-outline mb-4">
+              <input type="number" id="form1Example23" class="form-control form-control-lg" name="unitPrice"
+                th:field="*{unitPrice}" />
+              <label class="form-label" for="form1Example23">Unit Price</label>
+              <span class="input-group-addon">$</span>
+            </div>
+
+            <!-- Discount input -->
+            <div class="form-outline mb-4">
+              <input type="number" id="form1Example23" class="form-control form-control-lg" name="discount"
+                th:field="*{discount}" />
+              <label class="form-label" for="form1Example23">Discount</label>
+              <span class="input-group-addon">%</span>
+            </div>
+
+            <!-- CategoryID input -->
+            <div class="form-outline mb-4">
+              <select name="categoryId" id="categoryId" class="form-control form-control-lg" th:field="*{categoryId}">
+
+                <option th:each=" item: ${categories}" th:value="${item.categoryId}" th:text="${item.name}"
+                  th:selected="${item.categoryId == product.categoryId}">Category Name</option>
+
+              </select>
+              <label class="form-label" for="form1Example23">Category ID</label>
+            </div>
+
+            <!-- Status input -->
+            <div class="form-outline mb-4">
+              <select name="status" id="categoryId" class="form-control form-control-lg" th:field="*{status}">
+                <option value="0">Out of Stock</option>
+                <option value="1">On sale</option>
+                <option value="2">Featured</option>
+                <option value="3">BestSeller</option>
+                <option value="4">Out of Order</option>
+              </select>
+              <label class="form-label" for="form1Example23">Status</label>
+            </div>
+
+            <!-- Description input -->
+            <div class="form-outline mb-4">
+              <textarea name="description" id="description" cols="" rows="3" class="form-control form-control-lg"
+                th:field="*{description}"></textarea>
+              <label class="form-label" for="form1Example23">Description</label>
+            </div>
+
+            <div >
+
+              <!-- Submit button  -->
+              <a th:href="@{/admin/products/add}" class="filled-button">New</a>
+              <button style="background-color: green;" class="filled-button"
+                th:text="${product.isEdit?'Update' : 'Save'}">Save</button>
+              <a style="background-color: red;" th:if="${product.isEdit}"
+                th:href="@{'/admin/products/delete/' + ${product.productId}}" class="filled-button">Delete</a>
+            </div>
+
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+
+
+
+</body>
+
+</html>

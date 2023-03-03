@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+
+
+</head>
+
+<body>
+
+
+
+	<section class="vh-100" layout:fragment="content" style="margin-top: -50px;">
+		<div class="best-features">
+			<div class="container">
+				<form th:action="@{/admin/accounts/saveOrUpdate}" method="post" th:object="${account}">
+					<div class="row">
+
+						<h2 th:text="${account.isEdit?'Edit Account':'Add New Account'}" style="text-align: center;">Add
+							New Account</h2>
+						<div class="container py-5 h-100">
+							<div class="row d-flex align-items-center justify-content-center h-100">
+								<div class="col-md-8 col-lg-7 col-xl-6">
+									<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+										class="img-fluid" alt="Phone image">
+								</div>
+								<div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+									<input type="hidden" th:field="*{isEdit}">
+									<!-- Email input -->
+									<div class="form-outline mb-4">
+
+										<input type="text" id="form1Example13" class="form-control form-control-lg"
+											name="username" th:field="*{username}" />
+										<small id="usernameHid" th:if="${#fields.hasErrors('username')}"
+											class="form-text text-muted">Username is invalid</small>
+										<label class="form-label" for="form1Example13">Email address</label>
+									</div>
+
+									<!-- Password input -->
+									<div class="form-outline mb-4">
+
+										<input type="password" id="form1Example23" class="form-control form-control-lg"
+											name="password" th:field="*{password}" />
+										<small id="passwordHid" th:if="${#fields.hasErrors('password')}"
+											class="form-text text-muted">Password is invalid</small>
+										<label class="form-label" for="form1Example23">Password</label>
+									</div>
+
+
+									<!-- Submit button -->
+									<button type="reset" class="btn btn-danger btn-lg btn-block">Reset</button>
+									<a th:href="@{/admin/accounts}" type="reset"
+										class="btn btn-secondary btn-lg btn-block">List Account</a>
+										<button type="submit" class="btn btn-primary btn-lg btn-block">
+											<span th:if="${account.isEdit}">Update</span>
+											<span th:unless="${account.isEdit}">Save</span>
+										</button>
+
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+
+
+
+
+</body>
+
+</html>

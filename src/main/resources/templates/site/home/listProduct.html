@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{site/dashboardLayout.html}">
+
+<head>
+
+
+</head>
+
+<body>
+
+	<section class="mx-auto" layout:fragment="content">
+		<div class="page-heading contact-heading header-text">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="text-content">
+							<h4>contact us</h4>
+							<h2>let’s get in touch</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-4 ">
+			<div class="col mx-auto" style="margin-bottom: -70px;">
+				<div class="filters " style="margin-left: 210px;">
+					<form th:action="@{searchUsProducts}" method="post">
+						<div class="form-inline " style="margin-left: 400px;">
+							<input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
+								placeholder="Name">
+
+							<button class="btn btn-outline-primary ml-2">Search</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="latest-products">
+
+			<div class="container">
+				
+				<div class="row" style="text-align: center; margin-left: 200px;">
+					
+					<ul th:each="item : ${listCategory}" >
+						<li  style=" margin: 20px; border-radius: 20px; "><a th:href="@{'/searchByCategory/' + ${item.categoryId}}" class="badge badge-secondary" th:text="${item.name}" style="min-width: 150px; "
+							th:value="${item.categoryId}">Animal</a></li>
+					</ul>
+				
+				</div>
+				<div class="row">
+
+
+					<!-- <div class="col-md-12">
+					  <div class="section-heading">
+						<h2>Latest Products</h2>
+						<a href="products.html">view all products <i class="fa fa-angle-right"></i></a>
+					  </div>
+					</div> -->
+					<div class="col-md-4" th:each="item,iStat : ${products}">
+						<div class="product-item">
+							<a th:href=" @{'/site/productDetail/' + ${item.productId}}"><img
+									th:src="${item.image!=null? '/uploads/images/' + item.image : 'images/noimage.jpg'}"
+									alt=""></a>
+							<div class="down-content">
+								<a th:href="@{'/site/ProductDetail' + ${item.productId}}">
+									<h4 th:text="${item.name}"></h4>
+								</a>
+								<h6 th:text="${item.unitPrice + '$'}"></h6>
+								<p th:text="${item.description}">Lorem ipsume dolor sit amet, adipisicing elite. Itaque,
+									corporis nulla aspernatur.</p>
+								<ul class="stars">
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+								</ul>
+								<span>Reviews (24)</span>
+							</div>
+						</div>
+
+					</div>
+
+
+
+
+				</div>
+				<div class="row">
+					<nav aria-label="..." th:if="${products.totalPages >0}" class="mx-auto mt-3">
+						<ul class="pagination">
+
+							<li th:class="${1==products.number +1} ? 'page-item active' : 'page-item' ">
+								<a th:href="@{/home(size=${products.size},page=${1})} " class="page-link">First</a>
+							</li>
+
+							<li class="page-item active" th:each="pageNumber : ${pageNumbers}"
+								th:if="${products.totalPages > 1}"
+								th:class="${pageNumber == products.number + 1 } ? 'page-item active':'page-item' ">
+								<a th:href="@{/home(size=${products.size},page=${pageNumber})} " class="page-link"
+									th:text="${pageNumber}"></a>
+							</li>
+
+							<li
+								th:class="${products.totalPages==products.number +1} ? 'page-item active' : 'page-item' ">
+								<a th:href="@{/home(size=${products.size},page=${products.totalPages})} "
+									class="page-link">Last</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+
+</body>
+
+</html>

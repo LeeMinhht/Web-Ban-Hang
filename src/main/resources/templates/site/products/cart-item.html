@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{site/dashboardLayout.html}">
+
+<head>
+
+
+</head>
+
+<body>
+
+	<section class="mx-auto" layout:fragment="content">
+		<div th:if="${message != null}" class="alert alert-primary" role="alert">
+			<i>[[${message}]]</i>
+		</div>
+		<div class="latest-products">
+			<div class="container">
+				<h2 style="text-align: center;">Order</h2>
+
+				<div class="rows mt-4">
+
+					<div class="col-sm-12">
+
+						<table class="table table-borderless table-dark" >
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>Quantity</th>
+									<th>Amount</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+
+
+								<form th:action="@{/site/shopping-cart/update}" method="post"
+									th:each="item : ${CART_ITEMS}">
+									<input type="hidden" name="productId" th:value="${item.productId}" />
+									<tr>
+										<td th:text="${item.productId }"></td>
+										<td th:text="${item.name }"></td>
+										<td th:text="${item.unitPrice}"></td>
+										<td><input name="quantity" type="number" th:value="${item.quantity}"
+												onblur="this.form.submit()" style="width: 50px;"></td>
+										<td th:text="${item.unitPrice *item.quantity}"></td>
+										<td><a class="btn btn-primary btn-sm"
+												th:href="@{'/site/order/' + ${item.productId}}">Order</a></td>
+									</tr>
+								</form>
+
+
+
+							</tbody>
+						</table>
+						<p style="font-weight: bold" th:text="${'Total: '+ TOTAL + '$'}"></p>
+						<hr />
+						<!-- <a class=" btn-primarybtn btn-sm">Clear
+							Cart</a> <a class="btn btn-primary btn-sm">Add
+							more</a> -->
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+</body>
+
+</html>

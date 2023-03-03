@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+
+
+</head>
+
+<body>
+
+
+
+  <section class="vh-100" layout:fragment="content">
+    <div class="best-features">
+      <div class="container">
+        <h2 style="text-align: center; color: white;">Revenue management</h2>
+        <div class="row">
+
+          <div class="col-12">
+
+            <div class="card">
+
+              <div class="card-body">
+                <div th:if="${message != null}" class="alert alert-primary" role="alert">
+                  <i>[[${message}]]</i>
+                </div>
+
+                <table class="table table-striped table-inverse">
+                  <form th:action="@{/admin/reports}" method="post" >
+                  <select name="month" id="" onchange="this.form.submit()">
+                    <option th:value="1">1</option>
+                    <option th:value="2">2</option>
+                    <option th:value="3">3</option>
+                    <option th:value="4">4</option>
+                    <option th:value="5">5</option>
+                    <option th:value="6">6</option>
+                    <option th:value="7">7</option>
+                    <option th:value="8">8</option>
+                    <option th:value="9">9</option>
+                    <option th:value="10">10</option>
+                    <option th:value="11">11</option>
+                    <option th:value="12">12</option>
+                    
+                  </select>
+                </form>
+                  <thead class="thead-inverse">
+                    <tr>
+                      <th>Month</th>
+                      <th>Sum</th>
+
+
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="item,iStat : ${listReport}">
+                      <td th:text="${item.thang}"></td>
+                      <td th:text="${item.tong}"></td>
+                   
+                       
+                    </tr>
+
+
+                  </tbody>
+                </table>
+
+                <script>
+                  function showConfirmModalDialog(id, name) {
+                    $('#productName').text(name);
+                    $('#yesOption').attr('href', '/admin/products/delete' + id);
+                    $('#confirmationId').modal('show');
+                  }
+                </script>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="confirmationId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                  aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Do you want to delete <span id="productName"></span>?
+                      </div>
+                      <div class="modal-footer">
+                        <a id="yesOption" type="button" class="btn btn-danger">Yes</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              
+            </div>
+
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+</body>
+
+</html>

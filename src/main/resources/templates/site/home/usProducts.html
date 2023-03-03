@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{site/dashboardLayout.html}">
+
+<head>
+
+
+</head>
+
+<body>
+
+	<section class="mx-auto" layout:fragment="content">
+		<div class="products">
+			<div class="container">
+			  <div class="row">
+				
+				<div class="col-md-12">
+				  <div class="filters">
+					<form th:action="@{searchUsProducts}" method="post">
+						<div class="form-inline " style="margin-left: 400px;">
+							<input type="text" class="form-control"
+								name="name" id="name" aria-describedby="helpId" placeholder="Name">
+
+							<button class="btn btn-outline-primary ml-2">Search</button>
+
+						</div>
+						
+					</form>
+					
+				  </div>
+				  <div class="row" style="text-align: center; margin-left: 200px;">
+					
+					<ul th:each="item : ${listCategory}" >
+						<li  style=" margin: 20px; border-radius: 20px; "><a th:href="@{'/searchByCategory/' + ${item.categoryId}}" class="badge badge-secondary" th:text="${item.name}" style="min-width: 150px; "
+							th:value="${item.categoryId}">Animal</a></li>
+					</ul>
+				
+				</div>
+				</div>
+				<div class="col-md-12">
+				  <div class="filters-content">
+					
+					  <div class="row grid">
+						  <div class="col-lg-4 col-md-4 all des" th:each=" item: ${products}">
+							<div class="product-item">
+								<a th:href=" @{'/site/productDetail/' + ${item.productId}}"><img
+									th:src="${item.image!=null? '/uploads/images/' + item.image : 'images/noimage.jpg'}"
+									alt=""></a>
+							<div class="down-content">
+								<a th:href="@{'/site/ProductDetail' + ${item.productId}}">
+									<h4 th:text="${item.name}"></h4>
+								</a>
+								<h6 th:text="${item.unitPrice}"></h6>
+								<p th:text="${item.description}">Lorem ipsume dolor sit amet, adipisicing elite. Itaque,
+									corporis nulla aspernatur.</p>
+								<ul class="stars">
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+								</ul>
+								<span>Reviews (24)</span>
+							</div>
+							</div>
+						  </div>
+						  
+				  </div>
+				</div>
+				
+			  </div>
+			</div>
+		  </div>
+	</section>
+
+</body>
+
+</html>

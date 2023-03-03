@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{site/dashboardLayout.html}">
+
+<head>
+
+
+</head>
+
+<body>
+
+	<section class="vh-auto" layout:fragment="content">
+		<div class="latest-products">
+			<div class="container">
+				<div class="row">
+
+
+					<div class="product-item col-6" style="border: none;">
+						<a href="#"><img
+								th:src="${productDetail.image!=null? '/uploads/images/' + productDetail.image : 'images/noimage.jpg'}"
+								alt="" class="img-fluid" style="border-radius:10px ;"></a>
+					</div>
+					<div class=" col-6 left">
+						<a href="#">
+							<h4 th:text="${productDetail.name}"></h4>
+						</a>
+						<div class="mt-4">
+							<h5 style="color: coral	;">Price: <span th:text="${productDetail.unitPrice +' $'}"
+									style="font-size: 15px; color: brown;"></span></h5>
+							<!-- <h5 style="color: coral;">Discount: <span th:text="${productDetail.discount+' %'}"
+									style="font-size: 15px; color: brown;"></span></h5>
+							
+									<h5 style="color: coral;">Last price: <span th:text="${productDetail.unitPrice -(productDetail.unitPrice*productDetail.discount)/100 +'$'}"
+										style="font-size: 15px; color: brown;"></span></h5> -->
+							<p th:text="${productDetail.description}">Lorem ipsume dolor sit amet, adipisicing elite.
+								Itaque, corporis nulla aspernatur.</p>
+							<ul class="stars">
+								<li><i class="fa fa-star"></i></li>
+								<li><i class="fa fa-star"></i></li>
+								<li><i class="fa fa-star"></i></li>
+								<li><i class="fa fa-star"></i></li>
+								<li><i class="fa fa-star"></i></li>
+							</ul>
+							<span>Reviews (24)</span>
+						</div>
+						<div style="margin-top: 60px;">
+							<a th:href="@{'/site/shopping-cart/add/' + ${productDetail.productId} }"
+								class="btn btn-primary">Buy</a>
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+		</div>
+	</section>
+
+</body>
+
+</html>
